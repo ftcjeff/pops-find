@@ -11,7 +11,7 @@ import (
 )
 
 func isIgnored(name string) bool {
-	dirsToIgnore := []string{"Godeps", ".svn", ".git"}
+	dirsToIgnore := []string{"Godeps", ".svn", ".git", "vendor"}
 
   for _, dir := range dirsToIgnore {
     if name == dir {
@@ -66,7 +66,7 @@ func processDirectory(path string, fileType string, patterns []string) {
 			processDirectory(dirName, fileType, patterns)
 		}
 
-		if !strings.HasSuffix(f.Name(), fileType) {
+		if fileType != ".all" && !strings.HasSuffix(f.Name(), fileType) {
 			continue
 		}
 
