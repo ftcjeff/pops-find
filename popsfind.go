@@ -66,7 +66,7 @@ func processDirectory(path string, fileType string, patterns []string) {
 			processDirectory(dirName, fileType, patterns)
 		}
 
-		if fileType != ".all" && !strings.HasSuffix(f.Name(), fileType) {
+		if fileType != "ALL" && !strings.HasSuffix(f.Name(), fileType) {
 			continue
 		}
 
@@ -80,7 +80,13 @@ func main() {
 		log.Fatal("usage: pops-find <filetype> string1 [string2...stringn]")
 	}
 
-	fileType := "." + os.Args[1]
+	var fileType string;
+	log.Printf(os.Args[1])
+	if os.Args[1] != "ALL" {
+		fileType = "." + os.Args[1]
+	} else {
+		fileType = "ALL"
+	}
 	patterns := os.Args[2:]
 
 	log.Printf("### Searching '%s' files for: %s\n", fileType, patterns)
